@@ -10,8 +10,14 @@ use Curl\Curl;
 
 class Base
 {
+
+	/** @var curl*/
 	private $curl;
+
+	/** @var  string */
 	private $url;
+
+	/** @var  array */
 	private $result;
 
 	/**

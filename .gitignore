@@ -1,3 +1,5 @@
-*.xls
+*.xls*
 *.lock
 vendor/
+.idea/
+*.numbers

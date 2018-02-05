@@ -28,10 +28,10 @@ class Product extends Base
 		{
 			$product = $this->getProducts(array('PROPERTY_'.$this->getFieldId() => $row['A']));
 
-			if ($product->total > 0)
+			if ($product->total)
 			{
 				$result = $this->update($product->result[0]->ID, $row);
-				$this->setResult($result->result ? 'UPDATE' : 'ERROR', array($product->result[0], $row));
+				$this->setResult($result->result ? 'UPDATE' : 'ERROR', array(array_merge(array('ID'=>$product->result[0]->ID, $row))));
 			}
 			else
 			{
