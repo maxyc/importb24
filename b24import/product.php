@@ -11,29 +11,12 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Product extends Base
 {
 	private $fieldId;
-	private $currencyId;
+	private $fieldId;
 
-	/**
-	 * @return mixed
-	 */
-	public function getCurrencyId()
-	{
-		return $this->currencyId;
-	}
-
-	/**
-	 * @param mixed $currencyId
-	 */
-	public function setCurrencyId($currencyId)
-	{
-		$this->currencyId = $currencyId;
-	}
-
-	public function __construct($url, $fieldId, $currencyId)
+	public function __construct($url, $fieldId)
 	{
 		$this->setUrl($url);
 		$this->setFieldId($fieldId);
-		$this->setCurrencyId($currencyId);
 
 		parent::__construct();
 	}
@@ -48,8 +31,11 @@ class Product extends Base
 
 			if ($product->total)
 			{
-				$result = $this->update($product->result[0]->ID, $row);
-				$this->setResult($result->result ? 'UPDATE' : 'ERROR', array(array_merge(array('ID'=>$product->result[0]->ID, $row))));
+				foreach($product->result as $item)
+				{
+					$result = $this->update($item->ID, $row);
+					$this->setResult($result->result ? 'UPDATE' : 'ERROR', array(array_merge(array('ID'=>$item->ID, $row))));
+				}
 			}
 			else
 			{
@@ -121,7 +107,6 @@ class Product extends Base
 				'FIELDS' => array(
 					'NAME' => $columns['B'],
 					'PRICE' => $columns['C'],
-					'CURRENCY_ID' => $this->getCurrencyId(),
 					'PROPERTY_'.$this->getFieldId() => $columns['A']
 				)
 			)
@@ -138,7 +123,6 @@ class Product extends Base
 				'FIELDS' => array(
 					'NAME' => $columns['B'],
 					'PRICE' => $columns['C'],
-					'CURRENCY_ID' => $this->getCurrencyId(),
 					'PROPERTY_'.$this->getFieldId() => $columns['A']
 				)
 			)
