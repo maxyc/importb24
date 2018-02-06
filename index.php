@@ -41,8 +41,8 @@ $config = (array)(file_exists('config.json')
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="fieldId" class="col-sm-2 control-label">FieldId: *</label>
-							<div class="col-sm-10">
+							<label for="fieldId" class="col-sm-4 control-label">FieldId:*</label>
+							<div class="col-sm-8">
 								<input name="fieldId" type="number" class="form-control" id="fieldId" value="<?=$config['fieldId']?>" placeholder="99">
 								<span class="help-block">ID свойства товара №кат</span>
 							</div>
@@ -50,8 +50,8 @@ $config = (array)(file_exists('config.json')
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="currencyId" class="col-sm-2 control-label">CurrencyId: *</label>
-							<div class="col-sm-10">
+							<label for="currencyId" class="col-sm-4 control-label">CurrencyId:*</label>
+							<div class="col-sm-8">
 								<input name="currencyId" type="number" class="form-control" id="currencyId" value="<?=$config['currencyId']?>" placeholder="RUB">
 								<span class="help-block">Валюта по умолчанию</span>
 							</div>

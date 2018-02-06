@@ -10,15 +10,17 @@ if(!$_POST)
 
 $dateTime = new DateTime();
 $logDir = 'log/'.$dateTime->format('d.m.Y H:i').'/';
+@chmod($logDir, 0777);
 @mkdir($logDir, 0777, true);
 
 $url = $_POST['url'];
 $fieldId = $_POST['fieldId'];
+$currencyId = $_POST['currencyId'];
 $pathToFile = $logDir.$_FILES['file']['name'];
 
 move_uploaded_file($_FILES['file']['tmp_name'], $pathToFile);
 
-$productImport = new \B24Import\Product($url, $fieldId);
+$productImport = new \B24Import\Product($url, $fieldId, $currencyId);
 $productImport->importFromFile($pathToFile);
 $result = $productImport->getResult();
 
