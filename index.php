@@ -19,7 +19,8 @@ $config = (array)(file_exists('config.json')
 	? json_decode(file_get_contents('config.json'))
 	: array(
 		'url' => '',
-		'fieldId' => 99
+		'fieldId' => 99,
+		'currencyId'=>'RUB'
 	));
 ?>
 <div class="container">
@@ -37,11 +38,24 @@ $config = (array)(file_exists('config.json')
 						<span class="help-block">Левое меню - Приложения - Вебхуки - Создать входящий вебхук - CRM - Сохранить</span>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="fieldId" class="col-sm-2 control-label">FieldId: *</label>
-					<div class="col-sm-10">
-						<input name="fieldId" type="number" class="form-control" id="fieldId" value="<?=$config['fieldId']?>" placeholder="99">
-						<span class="help-block">ID свойства товара №кат</span>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="fieldId" class="col-sm-2 control-label">FieldId: *</label>
+							<div class="col-sm-10">
+								<input name="fieldId" type="number" class="form-control" id="fieldId" value="<?=$config['fieldId']?>" placeholder="99">
+								<span class="help-block">ID свойства товара №кат</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="currencyId" class="col-sm-2 control-label">CurrencyId: *</label>
+							<div class="col-sm-10">
+								<input name="currencyId" type="number" class="form-control" id="currencyId" value="<?=$config['currencyId']?>" placeholder="RUB">
+								<span class="help-block">Валюта по умолчанию</span>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -109,7 +123,7 @@ $config = (array)(file_exists('config.json')
 					require 'b24import/base.php';
 					require 'b24import/product.php';
 
-					$productImport = new \B24Import\Product($url, $fieldId);
+					$productImport = new \B24Import\Product($url, $fieldId, $currencyId);
 					$productImport->importFromFile($pathToFile);
 					$result = $productImport->getResult();
 

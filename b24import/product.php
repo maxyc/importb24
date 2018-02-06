@@ -11,11 +11,29 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Product extends Base
 {
 	private $fieldId;
+	private $currencyId;
 
-	public function __construct($url, $fieldId)
+	/**
+	 * @return mixed
+	 */
+	public function getCurrencyId()
+	{
+		return $this->currencyId;
+	}
+
+	/**
+	 * @param mixed $currencyId
+	 */
+	public function setCurrencyId($currencyId)
+	{
+		$this->currencyId = $currencyId;
+	}
+
+	public function __construct($url, $fieldId, $currencyId)
 	{
 		$this->setUrl($url);
 		$this->setFieldId($fieldId);
+		$this->setCurrencyId($currencyId);
 
 		parent::__construct();
 	}
@@ -103,6 +121,7 @@ class Product extends Base
 				'FIELDS' => array(
 					'NAME' => $columns['B'],
 					'PRICE' => $columns['C'],
+					'CURRENCY_ID' => $this->getCurrencyId(),
 					'PROPERTY_'.$this->getFieldId() => $columns['A']
 				)
 			)
@@ -119,6 +138,7 @@ class Product extends Base
 				'FIELDS' => array(
 					'NAME' => $columns['B'],
 					'PRICE' => $columns['C'],
+					'CURRENCY_ID' => $this->getCurrencyId(),
 					'PROPERTY_'.$this->getFieldId() => $columns['A']
 				)
 			)
